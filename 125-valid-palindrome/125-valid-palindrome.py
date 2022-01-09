@@ -1,13 +1,21 @@
 class Solution:
     def isPalindrome(self, s: str) -> bool:
-        chars: Deque = collections.deque() # 양방향 큐인 deque 선언
+        correct_list = []
         
         for char in s:
-            if char.isalnum(): # 해당 문자가 영문자와 숫자인지 판별하는 string.isalnum() 함수
-                chars.append(char.lower())
-
-        while len(chars) > 1:
-            if chars.popleft() != chars.pop():
-                return False
-
-        return True
+            if char >= 'a' and char <= 'z':
+                correct_list.append(char)
+            if char >= 'A' and char <= 'Z':
+                correct_list.append(char.lower()) # 대문자를 소문자로 바꿔주는 string.lower() 함수
+            if char.isdigit():
+                correct_list.append(char)
+        
+        # 리스트의 요소를 역순으로 바꿔서 반환하는 reversed 함수
+        reverse_list = list(reversed(correct_list)) 
+        
+        correct_str = "".join(correct_list) # 리스트를 문자열로 바꿔주는 string.join() 함수
+        reverse_str = "".join(reverse_list)
+        
+        if correct_str == reverse_str:
+            return True
+        return False
