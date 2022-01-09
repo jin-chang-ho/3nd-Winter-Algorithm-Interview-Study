@@ -5,5 +5,4 @@ class Solution:
         for i in range(length // 2):
             temp = s[i]
             s[i] = s[length- 1 - i]
-            s[length- 1 - i] = temp  
-# 12
+            s[length- 1 - i] = temp
