@@ -12,4 +12,3 @@ class Solution:
         alpha_logs_list.sort(key = lambda x : (x.split()[1:], x.split()[0]))
         
         return alpha_logs_list + num_logs_list
-    # 12
