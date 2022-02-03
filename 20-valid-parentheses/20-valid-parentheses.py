@@ -1,24 +1,16 @@
 class Solution:
     def isValid(self, s: str) -> bool:
-        check_list = []
+        stack = []
+        table = {
+            ')' : '(',
+            '}' : '{',
+            ']' : '['
+        }
         
-        for check in s:
-            if check == '(' or check == '{' or check == '[':
-                check_list.append(check)
-            if check == ')' or check == '}' or check == ']':
-                if len(check_list) == 0:
-                    return False
-                if check == ')':
-                    if check_list.pop() != '(':
-                        return False
-                if check == '}':
-                    if check_list.pop() != '{':
-                        return False
-                if check == ']':
-                    if check_list.pop() != '[':
-                        return False
-        
-        if check_list:
-            return False
-        
-        return True
+        for char in s:
+            if char not in table:
+                stack.append(char)
+            elif not stack or table[char] != stack.pop():
+                return False
+            
+        return len(stack) == 0
