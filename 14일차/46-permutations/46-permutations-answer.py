@@ -1,27 +1,21 @@
-from itertools import permutations
-
 class Solution:
     def permute(self, nums: List[int]) -> List[List[int]]:
-        def check(index, path, nums):
-            prev_nums = nums[:]
-            
-            if len(path) == nums_len:
-                answer.append(path[:])
-                return
-            
-            for i in range(len(nums)):
-                path.append(nums.pop(i))
-                check(i + 1, path, nums)
-                nums = prev_nums[:]
-                path.pop(-1)
+        def dfs(elements):
+            if len(elements) == 0:
+                results.append(prev_elements[:])
+                
+            for e in elements:
+                next_elements = elements[:]
+                next_elements.remove(e)
+                
+                prev_elements.append(e)
+                dfs(next_elements)
+                prev_elements.pop()
+                
+        results = []
+        prev_elements = []
         
-        if not nums:
-            return [[]]
+        dfs(nums)
         
-        answer = []
-        
-        nums_len = len(nums)
-        
-        check(0, [], nums)
-        
-        return answer
+        return results
+                
