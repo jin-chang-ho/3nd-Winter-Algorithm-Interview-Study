@@ -17,8 +17,6 @@ class Solution:
                 al = prev_al[:]
                 path.pop()
             
-        
-        
         result = []
         check(0, [], [c for c in range(1, n + 1)])
         return result
