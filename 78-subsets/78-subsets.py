@@ -5,7 +5,7 @@ class Solution:
                 if nums[i] in path:
                     continue
                 path.append(nums[i])
-                check(i, path)
+                check(i + 1, path)
                 answer.append(path[:])
                 path.pop()
             return
