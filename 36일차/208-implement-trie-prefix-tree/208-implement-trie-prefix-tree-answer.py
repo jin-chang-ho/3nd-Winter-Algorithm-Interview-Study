@@ -1,37 +1,30 @@
 class Trie:
     def __init__(self):
-        self.queue = []
+        self.root = TrieNode()
 
     def insert(self, word: str) -> None:
-        temp = []
-        for w in word:
-            temp.append(w)
-        self.queue.append(temp)
+        node = self.root
+        for char in word:
+            if char not in node.children:
+                node.children[char] = TrieNode()
+            node = node.children[char]
+        node.word = True
 
     def search(self, word: str) -> bool:
-        for que in self.queue:
-            if que[0] == word[0] and len(que) == len(word):
-                count = 1
-                for i in range(1, len(que)):
-                    if que[i] != word[i]:
-                        break
-                    count = count + 1
-                if count == len(word):
-                    return True
-        return False
+        node = self.root
+        for char in word:
+            if char not in node.children:
+                return False
+            node = node.children[char]
+        return node.word
 
     def startsWith(self, prefix: str) -> bool:
-        for que in self.queue:
-            if que[0] == prefix[0] and len(que) >= len(prefix):
-                count = 1
-                for i in range(1, len(prefix)):
-                    if que[i] != prefix[i]:
-                        break
-                    count = count + 1
-                if count == len(prefix):
-                    return True
-        return False
-
+        node = self.root
+        for char in prefix:
+            if char not in node.children:
+                return False
+            node = node.children[char]
+        return True
 
 # Your Trie object will be instantiated and called as such:
 # obj = Trie()
